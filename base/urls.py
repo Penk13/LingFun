@@ -18,13 +18,17 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from core.views import home
+from core.views import home, about_us, services, terms_of_service, privacy_policy
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     
     path('', home, name='home'),
+    path('about-us/', about_us, name='about-us'),
+    path('services/', services, name='services'),
+    path('terms-of-service/', terms_of_service, name='terms-of-service'),
+    path('privacy_policy/', privacy_policy, name='privacy-policy'),
 ]
 
 if settings.DEBUG:
