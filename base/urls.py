@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from core.views import home, about_us, services, terms_of_service, privacy_policy
+from course.views import courses, course
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +30,9 @@ urlpatterns = [
     path('services/', services, name='services'),
     path('terms-of-service/', terms_of_service, name='terms-of-service'),
     path('privacy_policy/', privacy_policy, name='privacy-policy'),
+
+    path('courses/', courses, name='courses'),
+    path('courses/<int:pk>/', course, name='course'),
 ]
 
 if settings.DEBUG:
