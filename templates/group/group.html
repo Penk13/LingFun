@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% load static %}
+
+{% block title_page %} {{ group.name }} {% endblock title_page %}
+
+{% block content %}
+<div class="container my-5">
+    <h3 class="mb-0 mt-3">{{ group.name }}</h3>
+    <span>{{ group.creator.username }}</span>
+    <p class="my-3">{{ group.description }}</p>
+
+    <h3>Conversation:</h3>
+    <div class="border p-3">
+        {% for chat in chats %}
+        <div class="card m-3 p-3">
+            <b><span>{{ chat.user.username }} - {{ chat.date_created }}</span></b>
+            <p>{{ chat.content }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

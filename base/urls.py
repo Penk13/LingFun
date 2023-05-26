@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 
 from core.views import home, about_us, services, terms_of_service, privacy_policy
 from course.views import courses, course
+from group.views import groups, group
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,6 +34,9 @@ urlpatterns = [
 
     path('courses/', courses, name='courses'),
     path('courses/<int:pk>/', course, name='course'),
+
+    path('groups/', groups, name='groups'),
+    path('group/<int:pk>/', group, name='group'),
 ]
 
 if settings.DEBUG:

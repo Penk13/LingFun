@@ -37,4 +37,4 @@ class UserCourse(models.Model):
     enrolled_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.course + " - " + self.user
+        return self.course + " - " + self.user.username
