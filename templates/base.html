@@ -42,6 +42,13 @@
 						<input class="form-control" type="search" placeholder="Search Anything">
 						<button class="btn btn-success ms-2" type="submit">Search</button>
 					</form>
+					<div class="ms-3">
+						{% if user.is_authenticated %}
+						<a class="text-dark fw-bold text-decoration-none" href="{% url 'profile' %}">My Profile</a>
+						{% else %}
+						<a class="text-dark fw-bold text-decoration-none" href="{% url 'account_login' %}">Login</a>
+						{% endif %}
+					</div>
 				</div>
 			</div>
 		</nav>

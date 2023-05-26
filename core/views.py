@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
@@ -15,3 +16,11 @@ def terms_of_service(request):
 
 def privacy_policy(request):
     return render(request, "core/privacy_policy.html")
+
+@login_required
+def profile(request):
+    user = request.user
+    context = {
+        "user": user
+    }
+    return render(request, "core/profile.html", context)
