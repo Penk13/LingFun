@@ -8,6 +8,23 @@
     <h3 class="mb-0 mt-3">{{ course.title }}</h3>
     <span>{{ course.language }} - {{ course.difficulty|lower|capfirst }}</span>
     <p class="my-3">{{ course.description }}</p>
+
+    {% if user_course %}
     <p class="my-3">{{ course.content }}</p>
+    
+    <div class="border p-3">
+        <h5>Quiz:</h5>
+        <ul>
+            {% for quiz in quizzes %}
+            <li>
+                {{ quiz.name }} <a href="{% url 'quiz' quiz.pk %}">Take the Quiz</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% else %}
+    <a class="btn btn-lg text-light fw-bold" style="background-color: #5fcf80;" href="{% url 'enroll' course.pk %}">Enroll</a>
+    {% endif %}
 </div>
 {% endblock content %}

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 DIFFICULTY = (
@@ -33,8 +34,32 @@ class Course(models.Model):
 class UserCourse(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    is_completed = models.BooleanField(default=False)
     enrolled_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.course + " - " + self.user.username
+        return self.course.title + " - " + self.user.username
+
+
+class Quiz(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, blank=False)
+    question = models.TextField(blank=False)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+
+class UserQuiz(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    answer = models.TextField(blank=True)
+    is_finished = models.BooleanField(default=False)
+    score = models.IntegerField(null=True, blank=True, validators=[
+        MinValueValidator(0, message='Score cannot be less than 0.'),
+        MaxValueValidator(100, message='Score cannot be greater than 100.')
+    ])
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.quiz.name + " - " + self.user.username
