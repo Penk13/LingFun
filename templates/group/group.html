@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %}
+{% extends 'base.html' %} {% load static %} {% load crispy_forms_tags %}
 
 {% block title_page %} {{ group.name }} {% endblock title_page %}
 
@@ -9,21 +9,29 @@
     <p class="my-3">{{ group.description }}</p>
 
     {% if user_group %}
-    <h3>Conversation:</h3>
-    <div class="border p-3">
+    <div class="card p-3 bg-light">
+        <h3>Conversation:</h3>
         {% for chat in chats %}
         {% if chat.user == request.user %}
-        <div class="border border-2 border-success rounded m-3 p-3">
+        <div class="card w-50 border-2 border-success rounded ms-auto m-3 p-3">
             <b><span>{{ chat.user.username }} - {{ chat.date_created }}</span></b>
             <p>{{ chat.content }}</p>
         </div>
         {% else %}
-        <div class="border rounded m-3 p-3">
+        <div class="card w-50 rounded m-3 p-3">
             <b><span>{{ chat.user.username }} - {{ chat.date_created }}</span></b>
             <p>{{ chat.content }}</p>
         </div>
         {% endif %}
         {% endfor %}
+    </div>
+    <div class="card mt-5 p-3">
+        <h3>Add Chat:</h3>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input class="btn text-light fw-bold" style="background-color: #5fcf80;" type="submit" value="Send">
+        </form>
     </div>
 
     {% else %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Group, Chat, UserGroup
+from .forms import ChatForm
 
 
 def groups(request):
@@ -20,10 +21,22 @@ def group(request, pk):
         user_group = False
         chats = False
 
+    form = ChatForm()
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = ChatForm(request.POST)
+            if form.is_valid():
+                obj = form.save(commit=False)
+                obj.group = group
+                obj.user = user
+                obj.save()
+                return redirect("group", pk=pk)
+
     context = {
         "group": group,
         "chats": chats,
         "user_group": user_group,
+        "form": form,
     }
     return render(request, "group/group.html", context)
 
