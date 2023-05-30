@@ -12,12 +12,13 @@ def groups(request):
 
 def group(request, pk):
     group = get_object_or_404(Group, pk=pk)
-    chats = Chat.objects.filter(group=group)
     user = request.user
     try:
         user_group = UserGroup.objects.get(group=group, user=user)
+        chats = Chat.objects.filter(group=group)
     except:
         user_group = False
+        chats = False
 
     context = {
         "group": group,

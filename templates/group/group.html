@@ -12,10 +12,17 @@
     <h3>Conversation:</h3>
     <div class="border p-3">
         {% for chat in chats %}
-        <div class="card m-3 p-3">
+        {% if chat.user == request.user %}
+        <div class="border border-2 border-success rounded m-3 p-3">
             <b><span>{{ chat.user.username }} - {{ chat.date_created }}</span></b>
             <p>{{ chat.content }}</p>
         </div>
+        {% else %}
+        <div class="border rounded m-3 p-3">
+            <b><span>{{ chat.user.username }} - {{ chat.date_created }}</span></b>
+            <p>{{ chat.content }}</p>
+        </div>
+        {% endif %}
         {% endfor %}
     </div>
 

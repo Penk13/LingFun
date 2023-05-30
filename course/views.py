@@ -13,12 +13,13 @@ def courses(request):
 
 def course(request, pk):
     course = get_object_or_404(Course, pk=pk)
-    quizzes = Quiz.objects.filter(course=course)
     user = request.user
     try:
         user_course = UserCourse.objects.get(course=course, user=user)
+        quizzes = Quiz.objects.filter(course=course)
     except:
         user_course = False
+        quizzes = False
     
     context = {
         "course": course,
