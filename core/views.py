@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from course.models import Course, UserCourse, Quiz, UserQuiz
+from group.models import Group, Chat, UserGroup
 
-# Create your views here.
+
 def home(request):
     return render(request, "core/home.html")
 
@@ -20,7 +22,11 @@ def privacy_policy(request):
 @login_required
 def profile(request):
     user = request.user
+    user_course = UserCourse.objects.filter(user=user)
+    user_group = UserGroup.objects.filter(user=user)
     context = {
-        "user": user
+        "user": user,
+        "user_course": user_course,
+        "user_group": user_group,
     }
     return render(request, "core/profile.html", context)
