@@ -8,6 +8,7 @@
     <span>{{ group.creator.username }}</span>
     <p class="my-3">{{ group.description }}</p>
 
+    {% if user_group %}
     <h3>Conversation:</h3>
     <div class="border p-3">
         {% for chat in chats %}
@@ -17,6 +18,10 @@
         </div>
         {% endfor %}
     </div>
+
+    {% else %}
+    <a class="btn btn-lg text-light fw-bold" style="background-color: #5fcf80;" href="{% url 'join-group' group.pk %}">Join</a>
+    {% endif %}
 </div>
 
 {% endblock content %}

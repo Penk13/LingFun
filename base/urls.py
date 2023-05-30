@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 
 from core.views import home, about_us, services, terms_of_service, privacy_policy, profile
 from course.views import courses, course, enroll, quiz
-from group.views import groups, group
+from group.views import groups, group, join_group
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,7 +39,8 @@ urlpatterns = [
     path('courses/quiz/<int:pk>/', quiz, name='quiz'),
 
     path('groups/', groups, name='groups'),
-    path('group/<int:pk>/', group, name='group'),
+    path('groups/<int:pk>/', group, name='group'),
+    path('groups/join/<int:pk>/', join_group, name='join-group'),
 ]
 
 if settings.DEBUG:
