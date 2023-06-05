@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% load static %}
+
+{% block title_page %} Leaderboard {% endblock title_page %}
+
+{% block content %}
+<div class="container my-5">
+    <h3>Leaderboard for {{ quiz.name }}</h3>
+    <div class="card p-3 my-3">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Ranking</th>
+                    <th class="w-75" scope="col">Name</th>
+                    <th scope="col">Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user_quiz in user_quizzes %}
+                {% if user_quiz.user == request.user %}
+                <tr class="table-secondary">
+                    <th scope="row">#{{ forloop.counter }}</th>
+                    <td>{{ user_quiz.user.username }}</td>
+                    <td>{{ user_quiz.score }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <th scope="row">#{{ forloop.counter }}</th>
+                    <td>{{ user_quiz.user.username }}</td>
+                    <td>{{ user_quiz.score }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a href="{% url 'quiz' quiz.pk %}">Back to quiz</a>
+</div>
+{% endblock content %}

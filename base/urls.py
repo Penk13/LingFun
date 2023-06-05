@@ -19,7 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from core.views import home, about_us, services, terms_of_service, privacy_policy, profile
-from course.views import courses, course, enroll, quiz
+from course.views import courses, course, enroll, quiz, leaderboard
 from group.views import groups, group, join_group
 
 urlpatterns = [
@@ -37,6 +37,7 @@ urlpatterns = [
     path('courses/<int:pk>/', course, name='course'),
     path('courses/enroll/<int:pk>/', enroll, name='enroll'),
     path('courses/quiz/<int:pk>/', quiz, name='quiz'),
+    path('courses/leaderboard/<int:pk>/', leaderboard, name='leaderboard'),
 
     path('groups/', groups, name='groups'),
     path('groups/<int:pk>/', group, name='group'),

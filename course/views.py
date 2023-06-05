@@ -65,3 +65,12 @@ def quiz(request, pk):
         "user_quiz": user_quiz,
     }
     return render(request, "course/quiz.html", context)
+
+def leaderboard(request, pk):
+    quiz = get_object_or_404(Quiz, pk=pk)
+    user_quizzes = UserQuiz.objects.all()
+    context = {
+        "quiz": quiz,
+        "user_quizzes": user_quizzes,
+    }
+    return render(request, "course/leaderboard.html", context)
