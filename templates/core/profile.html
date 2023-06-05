@@ -10,17 +10,17 @@
     </p>
     <div class="border p-3 my-3">
         <h5>My Course:</h5>
-        {% for course in user_course %}
+        {% for user_course in user_courses %}
         <ul>
-            <li><a class="fw-bold" href="{% url 'course' course.pk %}">{{ course.course.title }}</a> - Enrolled on {{ course.enrolled_date }}</li>
+            <li><a class="fw-bold" href="{% url 'course' user_course.course.pk %}">{{ user_course.course.title }}</a> - Enrolled on {{ user_course.enrolled_date }}</li>
         </ul>    
         {% endfor %}
     </div>
     <div class="border p-3 my-3">
         <h5>My Group:</h5>
-        {% for group in user_group %}
+        {% for user_group in user_groups %}
         <ul>
-            <li><a class="fw-bold" href="{% url 'group' group.pk %}">{{ group.group.name }}</a> - Joined on {{ group.date_joined }}</li>
+            <li><a class="fw-bold" href="{% url 'group' user_group.group.pk %}">{{ user_group.group.name }}</a> - Joined on {{ user_group.date_joined }}</li>
         </ul>    
         {% endfor %}
     </div>

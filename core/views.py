@@ -22,11 +22,11 @@ def privacy_policy(request):
 @login_required
 def profile(request):
     user = request.user
-    user_course = UserCourse.objects.filter(user=user)
-    user_group = UserGroup.objects.filter(user=user)
+    user_courses = UserCourse.objects.filter(user=user)
+    user_groups = UserGroup.objects.filter(user=user)
     context = {
         "user": user,
-        "user_course": user_course,
-        "user_group": user_group,
+        "user_courses": user_courses,
+        "user_groups": user_groups,
     }
     return render(request, "core/profile.html", context)
